@@ -7,11 +7,6 @@ import openai
 api_key = st.secrets.get("OPENAI_API_KEY")
 
 # Debugging: Check if API key is retrieved (Remove this after testing)
-st.write(f"🔍 Debug: API Key Found? {bool(api_key)}")
-st.write(f"🔍 Debug: API Key Value: {api_key}")  # 🔴 Remove this after confirming!
-
-if not api_key:
-    st.error("❌ API key not found. Please add it to Streamlit Cloud secrets.")
 
 # Initialize OpenAI client
 client = openai.OpenAI(api_key=api_key)
@@ -94,7 +89,7 @@ if st.button("Generate Action Plan"):
 ### Instructions:
 1. **Analyze the Grade Distribution**: Identify trends, such as the percentage of students struggling in different assessment criteria. **Make sure to use the exact criteria names** ({', '.join(criteria)}).
 2. **Subject-Specific Weaknesses**: Based on the subject ({option}), determine which skill areas need the most improvement.
-3. **Criterion-Specific Action Plan**: Suggest **short, crisp and specific** interventions for each weak criterion(50-80 words only). If students are struggling in **'{criteria[0]}'**, how should the teacher address it?
+3. **Criterion-Specific Action Plan**: Suggest **short, crisp and specific** interventions for each weak criterion(50 words only). If students are struggling in **'{criteria[0]}'**, how should the teacher address it?
 4. **Teaching Strategies**: Provide **subject-specific** strategies to address weaknesses (e.g., hands-on experiments for Science, real-world problem-solving for Math, structured essay guidance for English). Do not generalise. Just very specific activity examples based on {option_grade} and {option}.
 5. **Assessment & Monitoring**: Propose ways to track student improvement for each **specific criterion**.
 6. **Teacher Action Steps**: Provide **3-5 concrete steps** that teachers can implement **immediately**.
