@@ -83,14 +83,26 @@ if st.button("Generate Action Plan"):
         response = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
-                {"role": "system", "content": "You are an expert math educator. Your job is to analyze student performance and suggest a precise, data-driven action plan for improving Grade 7 Math based on their grade distribution."},
-                {"role": "user", "content": f"Here is the grade distribution for Grade 7 Math:\n{summary}\n\nPlease provide a specific, detailed action plan including:\n1. Key problem areas students struggle with based on their scores.\n2. Recommended teaching strategies (visual aids, hands-on practice, peer learning, etc.).\n3. Suggested math topics for extra focus.\n4. Assessment methods to track improvement."}
+                {"role": "system", "content": "You are an expert math educator. Your task is to analyze student performance and generate a detailed, targeted action plan for improving Grade 7 Math."},
+                {"role": "user", "content": f"""
+Here is the grade distribution for Grade 7 Math:
+{summary}
+
+Please provide a **specific and data-driven action plan**, including:
+1. **Grade Distribution Analysis:** Identify trends (e.g., percentage of students struggling in each range).
+2. **Specific Weak Areas:** Identify which criteria (e.g., Applying Math in Real-Life Contexts, Communicating Math) or topics (e.g., Algebra, Geometry) are most problematic.
+3. **Targeted Teaching Strategies:** Recommend specific interventions **for each weak area** (e.g., structured problem-solving for algebra, visual models for geometry).
+4. **Personalized Student Support:** How can we support different learning styles (e.g., auditory learners, kinesthetic learners)?
+5. **Assessment & Monitoring:** How should we measure progress over time?
+6. **Teacher Actionable Steps:** Provide 3-5 concrete actions that teachers can implement immediately.
+"""}
             ],
-            max_tokens=300,
-            temperature=0.6
+            max_tokens=350,
+            temperature=0.5
         )
         st.subheader("Action Plan")
         st.write(response.choices[0].message.content)
     else:
         st.warning("Please upload a file first before generating the action plan.")
+
 
