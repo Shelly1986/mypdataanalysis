@@ -73,7 +73,7 @@ if uploaded_file:
             file_name=f"{option_grade}_{criterion}.png",
             mime="image/png"
         )
-           summary = f"Subject: {option}, Grade Level: {option_grade}\nCriteria: {', '.join(criteria)}\nGrade distribution: {grade_counts.to_dict()}"
+            summary = f"Subject: {option}, Grade Level: {option_grade}\nCriteria: {', '.join(criteria)}\nGrade distribution: {grade_counts.to_dict()}"
 
 
    
