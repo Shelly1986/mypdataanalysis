@@ -6,17 +6,12 @@ import openai
 
 api_key = st.secrets.get("OPENAI_API_KEY")
 
-# Debugging: Check if API key is retrieved (Remove this after testing)
-
-# Initialize OpenAI client
 client = openai.OpenAI(api_key=api_key)
-col1, col2, col3 = st.columns([1, 3, 1])  # Middle column is twice as big
+col1, col2, col3 = st.columns([1, 3, 1])  
 with col2:
-    st.image("logo.jpg", width=350)  # Centered Image
+    st.image("logo.jpg", width=350)  
     st.title("MYP Data Analysis")
 
-
-# File uploader
 option_grade = st.selectbox("Select the Grade Level",("Grade 6","Grade 7","Grade 8","Grade 9","Grade 10"))
 option = st.selectbox(
     "Select the subject from the list",
@@ -45,38 +40,49 @@ else:
 uploaded_file = st.file_uploader("Upload your Excel file", type=["xlsx"])
 summary = ""
 if uploaded_file:
-    df = pd.read_excel(uploaded_file)   
+    df = pd.read_excel(uploaded_file, header=6) 
     for criterion in criteria:
         if criterion in df.columns:
             grade_counts = df[criterion].value_counts()
-
             fig, ax = plt.subplots(figsize=(5, 5))
             ax.pie(grade_counts, labels=grade_counts.index, autopct='%1.1f%%', startangle=140)
-            if criterion == "final":
-                ax.set_title(f"{option_grade} Distribution for Final Level of achievement")
-            else:
-                ax.set_title(f"{option_grade} Distribution for {criterion}")
-            
-            buf = io.BytesIO()
-            fig.savefig(buf, format="png",bbox_inches="tight", pad_inches=0.5)
-            buf.seek(0)
-            
+            ax.set_title(f"{option_grade} Distribution for {criterion}")
             st.pyplot(fig)
-            st.download_button(
-            label="Download Chart as Image",
-            data=buf,
-            file_name=f"{option_grade}_{criterion}.png",
-            mime="image/png"
-        )
-            summary = f"Subject: {option}, Grade Level: {option_grade}\nCriteria: {', '.join(criteria)}\nGrade distribution: {grade_counts.to_dict()}"
-
-
-   
         else:
             st.warning(f"Column '{criterion}' not found in the uploaded file.")
+        buf = io.BytesIO()
+        fig.savefig(buf, format="png",bbox_inches="tight", pad_inches=0.5)
+        buf.seek(0)
+            
     
+        st.download_button(
+        label="Download Chart as Image",
+        data=buf,
+        file_name=f"{option_grade}_{criterion}.png",
+        mime="image/png",
+        key=f"download_{criterion}")
+      
+    final_column = df.iloc[:, 10]
+    grade_counts = final_column.value_counts()
+    fig, ax = plt.subplots(figsize=(5, 5))
+    ax.pie(grade_counts, labels=grade_counts.index, autopct='%1.1f%%', startangle=140)
+    ax.set_title(f"{option_grade} Distribution for Final Level of achievement")
+    st.pyplot(fig)
+    
+    buf = io.BytesIO()
+    fig.savefig(buf, format="png",bbox_inches="tight", pad_inches=0.5)
+    buf.seek(0)
+    st.download_button(
+    label="Download Chart as Image",
+    data=buf,
+    file_name=f"{option_grade}_{criterion}.png",
+    mime="image/png",
+    key="download_final"
+    )
+    summary = f"Subject: {option}, Grade Level: {option_grade}\nCriteria: {', '.join(criteria)}\nGrade distribution: {grade_counts.to_dict()}"
+  
 if st.button("Generate Action Plan"):
-    if summary:  # Ensure summary is available
+    if summary:  
         response = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
@@ -102,4 +108,3 @@ if st.button("Generate Action Plan"):
         st.write(response.choices[0].message.content)
     else:
         st.warning("Please upload a file first before generating the action plan.")
-
