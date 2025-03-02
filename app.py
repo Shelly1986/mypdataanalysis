@@ -89,14 +89,14 @@ Here is the grade distribution for Grade 7 Math:
 {summary}
 
 Please provide a **specific and data-driven action plan**, including:
-1. **For Each Criterion:** Provide a separate grade distribution breakdown.
+1. **For Each Criterion:** Provide a separate grade distribution breakdown for all four criterion.
 2. **Compare Criteria:** Identify which criteria students struggle with the most.
 3. **Highlight Trends:** Identify whether foundational skills (e.g., 'Knowing and Understanding') are weaker than applied skills (e.g., 'Investigating Patterns').
-4. **Actionable Strategies:** Give specific strategies per weak area.
+4. **Actionable Strategies:** Give specific strategies per weak area. Give specific examples that teachers could implement. 
 5. **Final Summary:** Provide a holistic analysis of whether overall trends align with individual criteria challenges.
 """}
             ],
-            max_tokens=250,
+            max_tokens=350,
             temperature=0.5
         )
         st.subheader("Action Plan")
