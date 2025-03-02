@@ -73,7 +73,8 @@ if uploaded_file:
             file_name=f"{option_grade}_{criterion}.png",
             mime="image/png"
         )
-            summary = f"Grade distribution: {grade_counts.to_dict()}"
+            summary = f"Subject: {option}, Grade Level: {option_grade}\nGrade distribution: {grade_counts.to_dict()}"
+
    
         else:
             st.warning(f"Column '{criterion}' not found in the uploaded file.")
@@ -85,14 +86,16 @@ if st.button("Generate Action Plan"):
             messages=[
                 {"role": "system", "content": "You are an expert math educator. Your task is to analyze student performance and generate a detailed, targeted action plan for improving Grade 7 Math."},
                 {"role": "user", "content": f"""
-Here is the grade distribution for Grade 7 Math:
+Here is the student performance data:
+
 {summary}
 
-Please provide a **specific and data-driven action plan**, including:
-1. **Compare Criteria:** Identify which criteria students struggle with the most. Use the names of the exact criterion. 
-2. **Highlight Trends:** Identify whether foundational skills (e.g., 'Knowing and Understanding') are weaker than applied skills (e.g., 'Investigating Patterns').
-3. **Actionable Strategies:** Give specific strategies per weak area. Give specific examples that teachers could implement. 
-4. **Final Summary:** Provide a holistic analysis of whether overall trends align with individual criteria challenges.
+### Instructions:
+1. **Analyze the Grade Distribution**: Identify trends, such as the percentage of students struggling in different criteria.
+2. **Subject-Specific Weaknesses**: Based on the subject ({option}), determine which skill areas need the most improvement.
+3. **Targeted Teaching Strategies**: Suggest **specific** interventions that teachers can use for this subject.
+4. **Assessment & Monitoring**: Propose strategies for tracking student improvement in {option}.
+5. **Actionable Next Steps for Teachers**: Provide **3-5 concrete steps** that teachers can implement **immediately**.
 """}
             ],
             max_tokens=350,
