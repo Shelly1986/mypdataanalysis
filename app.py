@@ -4,13 +4,16 @@ import matplotlib.pyplot as plt
 import io
 import openai
 
-api_key = st.secrets["OPENAI_API_KEY"]  # Fetch securely from Streamlit secrets
+api_key = st.secrets.get("OPENAI_API_KEY")
 
-if api_key:
-    st.write("✅ API Key is set!")
-else:
+# Debugging: Check if API key is retrieved (Remove this after testing)
+st.write(f"🔍 Debug: API Key Found? {bool(api_key)}")
+st.write(f"🔍 Debug: API Key Value: {api_key}")  # 🔴 Remove this after confirming!
+
+if not api_key:
     st.error("❌ API key not found. Please add it to Streamlit Cloud secrets.")
 
+# Initialize OpenAI client
 client = openai.OpenAI(api_key=api_key)
 col1, col2, col3 = st.columns([1, 3, 1])  # Middle column is twice as big
 with col2:
