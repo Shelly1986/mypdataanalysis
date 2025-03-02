@@ -87,9 +87,9 @@ if st.button("Generate Action Plan"):
             messages=[
                 {"role": "system", "content": "You are an expert educator. Your task is to analyze student performance and generate a detailed, targeted action plan for improving student learning in the given subject and grade level."},
                 {"role": "user", "content": f"""
-### Student Performance Data:
+        ### Student Performance Data:
 
-{summary}
+        {summary}
 
 ### Instructions:
 1. **Analyze the Grade Distribution**: Identify trends, such as the percentage of students struggling in different assessment criteria. **Make sure to use the exact criteria names** ({', '.join(criteria)}).
