@@ -21,21 +21,21 @@ option = st.selectbox(
      "Performing Arts","Design","Music")
 )
 if option == "English L&L" or option == "German L&L":
-    criteria = ["A: Analysing", "B: Organizing", "C: Producing text", "D: Using language","final"]
+    criteria = ["A: Analysing", "B: Organizing", "C: Producing text", "D: Using language"]
 elif option == "German LA" or option == "English LA" or option == "French LA" or option == "Spanish LA":
-    criteria = ["A: Listening", "B: Reading", "C: Speaking", "D: Writing","final"]
+    criteria = ["A: Listening", "B: Reading", "C: Speaking", "D: Writing"]
 elif option == "Math":
-    criteria = ["A: Knowing and understanding", "B: Investigating patterns", "C: Communicating", "D: Applying mathematics in real-life contexts","final"]
+    criteria = ["A: Knowing and understanding", "B: Investigating patterns", "C: Communicating", "D: Applying mathematics in real-life contexts"]
 elif option == "Individuals and Societies":
-    criteria = ["A: Knowing and understanding", "B: Investigating", "C: Communicating", "D: Thinking critically","final"]
+    criteria = ["A: Knowing and understanding", "B: Investigating", "C: Communicating", "D: Thinking critically"]
 elif option == "Science":
-    criteria = ["A: Knowing and understanding", "B: Inquiring and designing", "C: Processing and evaluating", "D: Reflecting on the impacts of science","final"]
+    criteria = ["A: Knowing and understanding", "B: Inquiring and designing", "C: Processing and evaluating", "D: Reflecting on the impacts of science"]
 elif option == "Design":
-    criteria = ["A: Inquiring and analysing", "B: Developing ideas", "C: Creating the solution", "D: Evaluating","final"]
+    criteria = ["A: Inquiring and analysing", "B: Developing ideas", "C: Creating the solution", "D: Evaluating"]
 elif option == "PHE":
-    criteria = ["A: Knowing and understanding", "B: Planning for performance", "C: Applying and performing", "D: Reflecting and improving performance","final"]
+    criteria = ["A: Knowing and understanding", "B: Planning for performance", "C: Applying and performing", "D: Reflecting and improving performance"]
 else:
-    criteria = ["A: Investigating", "B: Developing", "C: Creating or performing", "D: Evaluating","final"]
+    criteria = ["A: Investigating", "B: Developing", "C: Creating or performing", "D: Evaluating"]
 
 uploaded_file = st.file_uploader("Upload your Excel file", type=["xlsx"])
 
