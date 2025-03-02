@@ -90,14 +90,14 @@ Here is the grade distribution for Grade 7 Math:
 
 Please provide a **specific and data-driven action plan**, including:
 1. **Grade Distribution Analysis:** Identify trends (e.g., percentage of students struggling in each range).
-2. **Specific Weak Areas:** Identify which criteria (e.g., Applying Math in Real-Life Contexts, Communicating Math) or topics (e.g., Algebra, Geometry) are most problematic.
+2. **Specific Weak Areas:** Identify which criteria (e.g., Applying Math in Real-Life Contexts, Communicating Math) are most problematic.
 3. **Targeted Teaching Strategies:** Recommend specific interventions **for each weak area** (e.g., structured problem-solving for algebra, visual models for geometry).
 4. **Personalized Student Support:** How can we support different learning styles (e.g., auditory learners, kinesthetic learners)?
 5. **Assessment & Monitoring:** How should we measure progress over time?
 6. **Teacher Actionable Steps:** Provide 3-5 concrete actions that teachers can implement immediately.
 """}
             ],
-            max_tokens=350,
+            max_tokens=250,
             temperature=0.5
         )
         st.subheader("Action Plan")
