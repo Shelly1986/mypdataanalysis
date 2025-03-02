@@ -38,7 +38,7 @@ else:
     criteria = ["A: Investigating", "B: Developing", "C: Creating or performing", "D: Evaluating","final"]
 
 uploaded_file = st.file_uploader("Upload your Excel file", type=["xlsx"])
-summary = ""
+
 if uploaded_file:
     df = pd.read_excel(uploaded_file, header=6) 
     for criterion in criteria:
