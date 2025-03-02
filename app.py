@@ -85,7 +85,7 @@ if st.button("Generate Action Plan"):
         {"role": "system", "content": "You are a helpful assistant."},
         {"role": "user", "content": f"Here is the grade distribution: {summary}. Suggest an action plan to improve student performance."}
     ],
-    max_tokens=150,
+    max_tokens=250,
     temperature=0.7
 )
     st.subheader("Action Plan")
