@@ -79,14 +79,18 @@ if uploaded_file:
             st.warning(f"Column '{criterion}' not found in the uploaded file.")
     
 if st.button("Generate Action Plan"):
-    response = client.chat.completions.create(
-    model="gpt-3.5-turbo",
-    messages=[
-        {"role": "system", "content": "You are a helpful assistant."},
-        {"role": "user", "content": f"Here is the grade distribution: {summary}. Suggest an action plan to improve student performance."}
-    ],
-    max_tokens=250,
-    temperature=0.7
-)
-    st.subheader("Action Plan")
-    st.write(response.choices[0].message.content)
+    if summary:  # Ensure summary is available
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "You are an expert math educator. Your job is to analyze student performance and suggest a precise, data-driven action plan for improving Grade 7 Math based on their grade distribution."},
+                {"role": "user", "content": f"Here is the grade distribution for Grade 7 Math:\n{summary}\n\nPlease provide a specific, detailed action plan including:\n1. Key problem areas students struggle with based on their scores.\n2. Recommended teaching strategies (visual aids, hands-on practice, peer learning, etc.).\n3. Suggested math topics for extra focus.\n4. Assessment methods to track improvement."}
+            ],
+            max_tokens=300,
+            temperature=0.6
+        )
+        st.subheader("Action Plan")
+        st.write(response.choices[0].message.content)
+    else:
+        st.warning("Please upload a file first before generating the action plan.")
+
