@@ -73,7 +73,8 @@ if uploaded_file:
             file_name=f"{option_grade}_{criterion}.png",
             mime="image/png"
         )
-            summary = f"Subject: {option}, Grade Level: {option_grade}\nGrade distribution: {grade_counts.to_dict()}"
+           summary = f"Subject: {option}, Grade Level: {option_grade}\nCriteria: {', '.join(criteria)}\nGrade distribution: {grade_counts.to_dict()}"
+
 
    
         else:
@@ -84,26 +85,26 @@ if st.button("Generate Action Plan"):
         response = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
-                {"role": "system", "content": "You are an expert math educator. Your task is to analyze student performance and generate a detailed, targeted action plan for improving Grade 7 Math."},
+                {"role": "system", "content": "You are an expert educator. Your task is to analyze student performance and generate a detailed, targeted action plan for improving student learning in the given subject and grade level."},
                 {"role": "user", "content": f"""
-Here is the student performance data:
+### Student Performance Data:
 
 {summary}
 
 ### Instructions:
-1. **Analyze the Grade Distribution**: Identify trends, such as the percentage of students struggling in different criteria.
+1. **Analyze the Grade Distribution**: Identify trends, such as the percentage of students struggling in different assessment criteria. **Make sure to use the exact criteria names** ({', '.join(criteria)}).
 2. **Subject-Specific Weaknesses**: Based on the subject ({option}), determine which skill areas need the most improvement.
-3. **Targeted Teaching Strategies**: Suggest **specific** interventions that teachers can use for this subject.
-4. **Assessment & Monitoring**: Propose strategies for tracking student improvement in {option}.
-5. **Actionable Next Steps for Teachers**: Provide **3-5 concrete steps** that teachers can implement **immediately**.
+3. **Criterion-Specific Action Plan**: Suggest **detailed** interventions for each weak criterion. If students are struggling in **'{criteria[0]}'**, how should the teacher address it?
+4. **Teaching Strategies**: Provide **subject-specific** strategies to address weaknesses (e.g., hands-on experiments for Science, real-world problem-solving for Math, structured essay guidance for English).
+5. **Assessment & Monitoring**: Propose ways to track student improvement for each **specific criterion**.
+6. **Teacher Action Steps**: Provide **3-5 concrete steps** that teachers can implement **immediately**.
 """}
             ],
-            max_tokens=350,
+            max_tokens=450,
             temperature=0.5
         )
         st.subheader("Action Plan")
         st.write(response.choices[0].message.content)
     else:
         st.warning("Please upload a file first before generating the action plan.")
-
 
