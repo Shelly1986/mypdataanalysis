@@ -4,7 +4,14 @@ import matplotlib.pyplot as plt
 import io
 import openai
 
-openai.api_key = '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'
+api_key = st.secrets["OPENAI_API_KEY"]  # Fetch securely from Streamlit secrets
+
+if api_key:
+    st.write("✅ API Key is set!")
+else:
+    st.error("❌ API key not found. Please add it to Streamlit Cloud secrets.")
+
+client = openai.OpenAI(api_key=api_key)
 col1, col2, col3 = st.columns([1, 3, 1])  # Middle column is twice as big
 with col2:
     st.image("logo.jpg", width=350)  # Centered Image
@@ -38,6 +45,7 @@ else:
     criteria = ["A: Investigating", "B: Developing", "C: Creating or performing", "D: Evaluating","final"]
 
 uploaded_file = st.file_uploader("Upload your Excel file", type=["xlsx"])
+summary = ""
 if uploaded_file:
     df = pd.read_excel(uploaded_file)   
     for criterion in criteria:
@@ -68,11 +76,14 @@ if uploaded_file:
             st.warning(f"Column '{criterion}' not found in the uploaded file.")
     
 if st.button("Generate Action Plan"):
-    response = openai.completions.create(
+    response = client.chat.completions.create(
     model="gpt-3.5-turbo",
-    prompt= "Here is the grade distribution: {summary}. Suggest an action plan to improve student performance.",
+    messages=[
+        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "user", "content": f"Here is the grade distribution: {summary}. Suggest an action plan to improve student performance."}
+    ],
     max_tokens=150,
     temperature=0.7
-    )
+)
     st.subheader("Action Plan")
-    st.write(response["choices"][0]["message"]["content"])
+    st.write(response.choices[0].message.content)
