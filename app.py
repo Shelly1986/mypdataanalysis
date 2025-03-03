@@ -65,7 +65,7 @@ if uploaded_file:
         key=f"download_{criterion}")
       
     final_column = df.iloc[:, 10]
-    final_grade_counts = final_column.value_counts().to_dict()
+    final_grade_counts = final_column.value_counts()
     summary += f"\nFinal Level of Achievement: {final_grade_counts}"
     fig, ax = plt.subplots(figsize=(5, 5))
     ax.pie(final_grade_counts, labels=final_grade_counts.index, autopct='%1.1f%%', startangle=140)
