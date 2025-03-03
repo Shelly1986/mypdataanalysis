@@ -42,6 +42,7 @@ uploaded_file = st.file_uploader("Upload your Excel file", type=["xlsx"])
 if uploaded_file:
     df = pd.read_excel(uploaded_file, header=6) 
     summary = f"Subject: {option}, Grade Level: {option_grade}\n"
+    grade_distribution = {}
     for criterion in criteria:
         if criterion in df.columns:
             grade_counts = df[criterion].value_counts()
