@@ -83,7 +83,7 @@ if uploaded_file:
     key="download_final"
     )
     summary = f"Subject: {option}, Grade Level: {option_grade}\nCriteria: {', '.join(criteria)}\nGrade distribution: {grade_counts.to_dict()}"
-  
+    st.write(summary)
 if st.button("Generate Action Plan"):
     if summary:  
         response = client.chat.completions.create(
