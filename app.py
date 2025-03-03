@@ -45,7 +45,7 @@ if uploaded_file:
     for criterion in criteria:
         if criterion in df.columns:
             grade_counts = df[criterion].value_counts()
-            summary += f"\nCriterion {criterion}: {grade_counts}"
+            summary += f"\n{criterion}: {grade_counts}"
             fig, ax = plt.subplots(figsize=(5, 5))
             ax.pie(grade_counts, labels=grade_counts.index, autopct='%1.1f%%', startangle=140)
             ax.set_title(f"{option_grade} Distribution for {criterion}")
