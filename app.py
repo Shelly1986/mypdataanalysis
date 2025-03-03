@@ -41,9 +41,11 @@ uploaded_file = st.file_uploader("Upload your Excel file", type=["xlsx"])
 
 if uploaded_file:
     df = pd.read_excel(uploaded_file, header=6) 
+    summary = f"Subject: {option}, Grade Level: {option_grade}\n"
     for criterion in criteria:
         if criterion in df.columns:
-            grade_counts = df[criterion].value_counts()
+            grade_counts = df[criterion].value_counts().to_dict()
+            summary += f"\nCriterion {criterion}: {grade_counts}"
             fig, ax = plt.subplots(figsize=(5, 5))
             ax.pie(grade_counts, labels=grade_counts.index, autopct='%1.1f%%', startangle=140)
             ax.set_title(f"{option_grade} Distribution for {criterion}")
@@ -63,7 +65,8 @@ if uploaded_file:
         key=f"download_{criterion}")
       
     final_column = df.iloc[:, 10]
-    grade_counts = final_column.value_counts()
+    grade_counts = final_column.value_counts().to_dict()
+    summary += f"\nFinal Level of Achievement: {final_grade_counts}"
     fig, ax = plt.subplots(figsize=(5, 5))
     ax.pie(grade_counts, labels=grade_counts.index, autopct='%1.1f%%', startangle=140)
     ax.set_title(f"{option_grade} Distribution for Final Level of achievement")
