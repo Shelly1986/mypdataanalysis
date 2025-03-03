@@ -55,7 +55,7 @@ if uploaded_file:
         buf = io.BytesIO()
         fig.savefig(buf, format="png",bbox_inches="tight", pad_inches=0.5)
         buf.seek(0)
-    st.write(summary)
+        st.write(summary)
             
     
         st.download_button(
