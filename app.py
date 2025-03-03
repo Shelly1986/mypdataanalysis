@@ -46,6 +46,7 @@ if uploaded_file:
         if criterion in df.columns:
             grade_counts = df[criterion].value_counts()
             summary += f"\n{criterion}: {grade_counts}"
+            grade_distribution[criterion] = grade_counts
             fig, ax = plt.subplots(figsize=(5, 5))
             ax.pie(grade_counts, labels=grade_counts.index, autopct='%1.1f%%', startangle=140)
             ax.set_title(f"{option_grade} Distribution for {criterion}")
@@ -83,27 +84,38 @@ if uploaded_file:
     mime="image/png",
     key="download_final"
     )
+    
     #summary = f"Subject: {option}, Grade Level: {option_grade}\nCriteria: {', '.join(criteria)}\nGrade distribution: {grade_counts.to_dict()}"
     st.write(summary)
+    grade_distribution_str = ""
+    for criterion, grade_counts in grade_distribution.items():
+        grade_distribution_str += f"\n{criterion}:\n{grade_counts.to_dict()}"
+    
+    action_plan_input = f"""
+    ### Student Performance Data:
+    Subject: {option}, Grade Level: {option_grade}
+    Criteria: {', '.join(criteria)}
+
+    Grade Distribution:
+    {grade_distribution_str}
+
+    ### Instructions:
+    1. **Look at the grade distribution for each criterion**: Focus on areas where there are students performing below Grade 5 or where the majority of students are clustered at Grade 5 or below.
+    2. **Subject-Specific Weaknesses**: Based on the subject ({option}), identify which criterion needs the most attention based on grade performance.
+    3. **Criterion-Specific Action Plan**: Provide a short, specific intervention for each weak criterion.
+    4. **Teaching Strategies**: Propose specific teaching strategies to improve performance in each weak criterion. Tailor these strategies to the subject ({option}).
+    5. **Assessment & Monitoring**: Suggest methods for assessing and tracking student progress for each criterion.
+    6. **Teacher Action Steps**: Provide 3-5 specific, concrete steps teachers can take immediately to address weaknesses.
+    """
+    
 if st.button("Generate Action Plan"):
     if summary:  
         response = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": "You are an expert educator. Your task is to analyze student performance and generate a detailed, targeted action plan for improving student learning in the given subject and grade level."},
-                {"role": "user", "content": f"""
-        ### Student Performance Data:
-
-        {summary}
-
-### Instructions:
-1. **Look at the {summary}. Analyze the Grade Distribution**: Provide a summary of total students getting a grade 0f 5,6 and 7 in each of the four criterion.  **Make sure to use the exact criteria names** ({', '.join(criteria)}).
-2. **Subject-Specific Weaknesses**: Based on the subject ({option}), determine which skill areas need the most improvement.
-3. **Criterion-Specific Action Plan**: Suggest **short, crisp and specific** interventions for each weak criterion(50 words only). If students are struggling in **'{criteria[0]}'**, how should the teacher address it?
-4. **Teaching Strategies**: Provide **subject-specific** strategies to address weaknesses (e.g., hands-on experiments for Science, real-world problem-solving for Math, structured essay guidance for English). Do not generalise. Just very specific activity examples based on {option_grade} and {option}.
-5. **Assessment & Monitoring**: Propose ways to track student improvement for each **specific criterion**.
-6. **Teacher Action Steps**: Provide **3-5 concrete steps** that teachers can implement **immediately**.
-"""}
+               {"role": "user", "content": action_plan_input}
+        
             ],
             max_tokens=550,
             temperature=0.5
