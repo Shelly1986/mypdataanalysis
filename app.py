@@ -102,7 +102,7 @@ if uploaded_file:
     {grade_distribution_str}
 
     ### Instructions:
-    1. **Look at the grade distribution for each criterion**: Focus on areas where there are students performing below Grade 5 or where the majority of students are clustered at Grade 5 or below.
+    1. **Look at the grade distribution for each criterion**: Focus on areas where there are students performing below Grade 5 or where the majority of students are clustered at Grade 5 or below. Provide a brief summary of criterion wise analysis.
     2. **Criterion-Specific Action Plan**: Provide a short, specific intervention for each of the four criterion.
     3. **Teaching Strategies**: Propose specific teaching strategies to improve performance in each criterion. Tailor these strategies to the subject ({option}).
     4. **Assessment & Monitoring**: Suggest methods for assessing and tracking student progress for each criterion.
