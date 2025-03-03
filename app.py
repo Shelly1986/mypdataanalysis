@@ -55,6 +55,7 @@ if uploaded_file:
         buf = io.BytesIO()
         fig.savefig(buf, format="png",bbox_inches="tight", pad_inches=0.5)
         buf.seek(0)
+    st.write(summary)
             
     
         st.download_button(
@@ -82,7 +83,7 @@ if uploaded_file:
     mime="image/png",
     key="download_final"
     )
-    summary = f"Subject: {option}, Grade Level: {option_grade}\nCriteria: {', '.join(criteria)}\nGrade distribution: {grade_counts.to_dict()}"
+    #summary = f"Subject: {option}, Grade Level: {option_grade}\nCriteria: {', '.join(criteria)}\nGrade distribution: {grade_counts.to_dict()}"
     st.write(summary)
 if st.button("Generate Action Plan"):
     if summary:  
