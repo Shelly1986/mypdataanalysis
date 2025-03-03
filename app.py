@@ -105,8 +105,8 @@ if uploaded_file:
     ### Instructions:
     1. **Look at the grade distribution for each criterion**: Focus on areas where there are students performing below Grade 5 or where the majority of students are clustered at Grade 5 or below.
     2. **Subject-Specific Weaknesses**: Based on the subject ({option}), identify which criterion needs the most attention based on grade performance.
-    3. **Criterion-Specific Action Plan**: Provide a short, specific intervention for each weak criterion.
-    4. **Teaching Strategies**: Propose specific teaching strategies to improve performance in each weak criterion. Tailor these strategies to the subject ({option}).
+    3. **Criterion-Specific Action Plan**: Provide a short, specific intervention for each criterion.
+    4. **Teaching Strategies**: Propose specific teaching strategies to improve performance in each criterion. Tailor these strategies to the subject ({option}).
     5. **Assessment & Monitoring**: Suggest methods for assessing and tracking student progress for each criterion.
     6. **Teacher Action Steps**: Provide 3-5 specific, concrete steps teachers can take immediately to address weaknesses.
     """
