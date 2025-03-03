@@ -46,7 +46,8 @@ if uploaded_file:
     for criterion in criteria:
         if criterion in df.columns:
             grade_counts = df[criterion].value_counts()
-            summary += f"\n{criterion}: {grade_counts}"
+            grade_distribution_str = ', '.join([f"{index}: {count}" for index, count in grade_counts.items()])
+            summary += f"\n{criterion}: {grade_distribution_str}\n"
             grade_distribution[criterion] = grade_counts
             fig, ax = plt.subplots(figsize=(5, 5))
             ax.pie(grade_counts, labels=grade_counts.index, autopct='%1.1f%%', startangle=140)
@@ -69,7 +70,8 @@ if uploaded_file:
       
     final_column = df.iloc[:, 10]
     final_grade_counts = final_column.value_counts()
-    summary += f"\nFinal Level of Achievement: {final_grade_counts}"
+    final_grade_distribution_str = ', '.join([f"{index}: {count}" for index, count in final_grade_counts.items()])
+    summary += f"\nFinal Level of Achievement: {final_grade_distribution_str}\n"
     fig, ax = plt.subplots(figsize=(5, 5))
     ax.pie(final_grade_counts, labels=final_grade_counts.index, autopct='%1.1f%%', startangle=140)
     ax.set_title(f"{option_grade} Distribution for Final Level of achievement")
