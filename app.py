@@ -118,7 +118,7 @@ if st.button("Generate Action Plan"):
                {"role": "user", "content": action_plan_input}
         
             ],
-            max_tokens=750,
+            max_tokens=550,
             temperature=0.5
         )
         st.subheader("Action Plan")
