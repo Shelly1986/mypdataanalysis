@@ -29,7 +29,7 @@ elif option == "Math":
 elif option == "Individuals and Societies":
     criteria = ["A: Knowing and understanding", "B: Investigating", "C: Communicating", "D: Thinking critically"]
 elif option == "Science":
-    criteria = ["A: Knowing and understanding", "B: Inquiring and designing", "C: Processing and evaluating", "D: Reflecting on the impacts of science"]
+    criteria = ["A: Knowing and understanding", "B: Inquiring and Designing", "C: Processing and Evaluating", "D: Reflecting on the Impacts of Science"]
 elif option == "Design":
     criteria = ["A: Inquiring and analysing", "B: Developing ideas", "C: Creating the solution", "D: Evaluating"]
 elif option == "PHE":
