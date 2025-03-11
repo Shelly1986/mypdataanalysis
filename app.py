@@ -107,6 +107,7 @@ if uploaded_file:
     3. **Teaching Strategies**: Propose specific teaching strategies to improve performance in each criterion. Tailor these strategies to the subject ({option}).
     4. **Assessment & Monitoring**: Suggest methods for assessing and tracking student progress for each criterion.
     5. **Teacher Action Steps**: Provide 3-5 specific, concrete steps teachers can take immediately to address weaknesses.
+    For each of the five points above, generate about 100-150 words.
     """
     
 if st.button("Generate Action Plan"):
